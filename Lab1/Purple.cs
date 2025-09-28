@@ -6,7 +6,7 @@
         {
             bool answer = false;
 
-            answer = (a > 0 && b > 0 && c > 0) (a < 0 && b < 0 && c < 0);
+            answer = (a > 0 && b > 0 && c > 0) || (a < 0 && b < 0 && c < 0);
 
             return answer;
         }
@@ -14,7 +14,7 @@
         {
             bool answer = false;
 
-            answer = (b != 0 && a % b == 0)(a != 0 && b % a == 0);
+            answer = (b != 0 && a % b == 0) || (a != 0 && b % a == 0);
 
             return answer;
         }
@@ -23,9 +23,7 @@
             bool answer = false;
 
             long A = a, B = b;
-            answer =
-                (A * A == B)(B * B == A)     
-                (A * A * A == B)(B * B * B == A); 
+            answer = (A * A == B) || (B * B == A) || (A * A * A == B) || (B * B * B == A);
 
             return answer;
         }
@@ -42,7 +40,7 @@
             double answer = 0;
 
             if (x <= -1) answer = 1;
-            else if (x <= 1) answer = -x;     
+            else if (x <= 1) answer = -x;
             else answer = -1;
 
             return answer;
@@ -54,7 +52,7 @@
             double a = System.Math.Sqrt(squareS);
             double r = System.Math.Sqrt(circleS / System.Math.PI);
 
-            answer = r + 1e-12 >= a * System.Math.Sqrt(2) / 2; 
+            answer = r + 1e-12 >= a * System.Math.Sqrt(2) / 2;
 
             return answer;
         }
@@ -87,21 +85,19 @@
         }
         public bool Task8(int year, int pupils, int salary)
         {
+
+
             bool answer = false;
             const int bank = 10000;
 
-            {
-                bool answer = false;
-                const int bank = 10000;
+            bool isLeap = (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
+            if (isLeap) return false;
 
-                bool isLeap = (year % 400 == 0)(year % 4 == 0 && year % 100 != 0);
-                if (isLeap) return false;
+            int aurors = (int)System.Math.Ceiling(pupils / 7.0);
 
-                int aurors = (int)System.Math.Ceiling(pupils / 7.0);
+            int cost = aurors * salary + pupils * 5;
 
-                int cost = aurors * salary + pupils * 5;
-
-                answer = cost <= bank;
+            answer = cost <= bank;
 
             return answer;
         }
